@@ -124,6 +124,52 @@ Los codigos de estado HTTP se agrupan en cinco clases y cada una representada po
 - 510 No extendido (Not Extended)
 - 511 Requiere autenticación de red (Network Authentication Required)
 
+# ASINCRONIA 
+
+la asincronia se refiere a la capacidad del lenguaje para ejecutar ciertas operaciones de manera asincrona lo que significa que estas operaciones pueden ocurrir independientemente del flujo principal del programa. Esto es especialmente util para tareas que pueden tomar un tiempo desconocido o que no se deben bloquear el hilo principal de ejecucion ademas la asincronia se maneja principalmente a traves de callbacks,promesas y mediante el uso de async/await.
+
+- Callbacks: Los callbacks son funciones que se pasan como argumentos a otras funciones y se ejecutan despues de que se completa una operacion asincronica. Son una forma tradicional de manejar la asincronia pero pueden llevar a un codigo dificil de mantener cuando se anidan demasiado.
+
+- Promesas: Las promesas son objetos que representan el resultado eventual de una operacion asincronica. Permiten un mejor manejo de la asincronia. Las promesas pueden estar en uno de tres estados: pendiente,resuelta o rechazada y se pueden encadenar utilizando metodos como .then() y .catch().
+
+- Async/await: Sintaxis que hace que el codigo asincronico parezca sincrono. async marca funciones que devuelven promesas y await pausa la ejecucion hasta que una promesa se resuelva haciendo el codigo más facil de leer.
+
+![alt text](image-1.png)
+
+# REALIZAR PETICIONES
+
+## Realizando Peticiones con Fetch
+
+Podemos realizar solicitudes a servidores remotos utilizando la interfaz fetch(). Esto nos permite obtener datos de una URL y manejar la respuesta de manera asíncrona.
+
+```javascript
+const info = {
+    name : 'Mauri',
+    lastname : 'Pereda'
+};
+
+
+fetch('https://jsonplaceholder.typicode.com/users', {
+    method: 'POST', // Especificamos el metodo de la solicitud
+    headers: {
+        'Content-Type': 'application/json' // Establecemos el tipo de contenido como JSON
+    },
+    body: JSON.stringify(info) // Convertimos el objeto 'info' a JSON y lo enviamos como cuerpo de la solicitud
+})
+
+.then((res) => {
+    return res.json(); // Convertimos la respuesta a JSON
+})
+.then((data) => { 
+                // Iteramos sobre cada usuario en los datos
+    data.forEach((user) => {
+        console.log(user.name); // Imprimimos el nombre de cada usuario
+    });
+});
+```
+
+
+
 ## Authors
 
 - [@Mauricio Pereda Ruiz](https://github.com/MauriPereda05)
